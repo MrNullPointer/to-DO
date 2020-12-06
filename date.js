@@ -1,27 +1,22 @@
 //module initialization. module.exports is a javascript object.
 
-module.exports.getDate = getDate;
-module.exports.getDay = getDay;
-
-function getDate() {
+exports.getDate = function () {
   //StackOverflow answer: how-to-format-a-javascript-date
-  options = {
+  const options = {
     year: "numeric",
     weekday: "long",
     day: "numeric",
     month: "long",
   };
 
-  let today = new Date();
-  let day = today.toLocaleString("en-US", options);
-  return day;
-}
+  const today = new Date();
+  return today.toLocaleString("en-US", options);
+};
 
-function getDay() {
-  let options = {
+exports.getDay = function () {
+  const options = {
     weekday: "long",
   };
-  let today = new Date();
-  let day = today.toLocaleString("en-US", options);
-  return day;
-}
+  const today = new Date();
+  return today.toLocaleString("en-US", options);
+};
