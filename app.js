@@ -6,7 +6,8 @@ app.use(bodyParser.urlencoded({ extended: true })); //required to process the in
 app.set("view engine", "ejs"); // setup EJS
 app.use(express.static("public")); // use static files
 
-var items = ["Buy Food", "Cook Food", "Eat Food"]; // Global list of items
+var items = []; // Global list of items
+let workItems = [];
 
 app.get("/", function (req, res) {
   //StackOverflow answer: how-to-format-a-javascript-date
@@ -20,13 +21,22 @@ app.get("/", function (req, res) {
   var today = new Date();
   day = today.toLocaleString("en-US", options);
 
-  res.render("list", { kindOfDay: day, newListItems: items });
+  res.render("list", { listTitle: day, newListItems: items });
 });
 
 app.post("/", function (req, res) {
   var item = req.body.newItem;
-  items.push(item);
-  res.redirect("/");
+  if (req.body.list === "Work") {
+    workItems.push(item);
+    res.redirect("/work");
+  } else {
+    items.push(item);
+    res.redirect("/");
+  }
+});
+
+app.get("/work", function (req, res) {
+  res.render("list", { listTitle: "Work", newListItems: workItems });
 });
 
 app.listen(3000, function () {
