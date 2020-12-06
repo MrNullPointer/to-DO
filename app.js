@@ -5,7 +5,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true })); //required to process the inputs from user
 app.set("view engine", "ejs"); // setup EJS
 
-var items = ["Buy", "Cook", "Eat"]; // Global list of items
+var items = ["Buy Food", "Cook Food", "Eat Food"]; // Global list of items
 
 app.get("/", function (req, res) {
   //StackOverflow answer: how-to-format-a-javascript-date
