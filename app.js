@@ -2,8 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); //required to process the inputs from user
 app.set("view engine", "ejs"); // setup EJS
+
+var items = ["Buy", "Cook", "Eat"]; // Global list of items
 
 app.get("/", function (req, res) {
   //StackOverflow answer: how-to-format-a-javascript-date
@@ -17,7 +19,13 @@ app.get("/", function (req, res) {
   var today = new Date();
   day = today.toLocaleString("en-US", options);
 
-  res.render("list", { kindOfDay: day });
+  res.render("list", { kindOfDay: day, newListItems: items });
+});
+
+app.post("/", function (req, res) {
+  var item = req.body.newItem;
+  items.push(item);
+  res.redirect("/");
 });
 
 app.listen(3000, function () {
