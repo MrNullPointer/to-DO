@@ -7,16 +7,16 @@ app.use(bodyParser.urlencoded({ extended: true })); //required to process the in
 app.set("view engine", "ejs"); // setup EJS
 app.use(express.static("public")); // use static files
 
-var items = []; // Global list of items
-let workItems = [];
+const items = []; // Global list of items
+const workItems = [];
 
 app.get("/", function (req, res) {
-  let day = date.getDay(); //can be changed to get date or day
+  const day = date.getDate(); //can be changed to get date or day
   res.render("list", { listTitle: day, newListItems: items });
 });
 
 app.post("/", function (req, res) {
-  var item = req.body.newItem;
+  const item = req.body.newItem;
   if (req.body.list === "Work") {
     workItems.push(item);
     res.redirect("/work");
