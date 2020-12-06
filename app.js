@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true })); //required to process the inputs from user
 app.set("view engine", "ejs"); // setup EJS
+app.use(express.static("public")); // use static files
 
 var items = ["Buy Food", "Cook Food", "Eat Food"]; // Global list of items
 
